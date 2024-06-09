@@ -1,0 +1,47 @@
+.memes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.meme {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 40px;
+  text-align: center;
+  width: 300px;
+}
+
+.memeImage {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.memeButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.memeButtons button {
+  background-color: #e376bf; /* Kolor tła przycisku w normalnym stanie */
+  color: #fff; /* Kolor tekstu przycisku w normalnym stanie */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 5px; /* Dodaje trochę odstępu między przyciskami */
+  cursor: pointer; /* Dodaje kursor wskazujący na przycisk */
+}
+
+.memeButtons button:hover {
+  background-color: #d9166a; /* Kolor tła przycisku w stanie hover */
+}
+
+.memeButtons button.voted {
+  background-color: #d9166a; /* Kolor tła przycisku po kliknięciu */
+  color: #fff;
+}

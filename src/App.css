@@ -1,0 +1,8 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+}

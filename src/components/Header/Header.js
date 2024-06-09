@@ -1,6 +1,6 @@
 // Header.js
 import React from "react";
-import catImage from "../../art/logo.png"; // Import
+import catImage from "../../art/logo.png";
 import "./Header.css";
 
 const Header = () => {

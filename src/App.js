@@ -1,15 +1,20 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import MemesGallery from "./components/MemesGallery/MemesGallery";
+import NavBar from "./components/NavBar/NavBar";
+import "./App.css";
+import MemesDisplay from "./components/MemesDisplay/MemesDisplay";
 
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
-      <Main>
-        <MemesGallery />
-      </Main>
+    <div className="page">
+      <Header />
+      <div className="main">
+        <Router>
+          <NavBar></NavBar>
+          <MemesDisplay></MemesDisplay>
+        </Router>
+      </div>
     </div>
   );
 }

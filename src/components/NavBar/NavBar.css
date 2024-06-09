@@ -1,0 +1,37 @@
+.NavBar {
+  background-color: beige;
+  padding: 20px;
+}
+
+.nav-button {
+  background-color: #eb95ce;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  display: block; /* ensures buttons behave like block elements */
+  text-align: center;
+  width: 100%; /* ensures buttons have the same width */
+  box-sizing: border-box; /* includes padding and border in the element's total width and height */
+  margin-bottom: 10px; /* adds space between buttons */
+}
+
+.nav-button:hover {
+  background-color: #d9166a;
+}
+
+.nav-button.active {
+  background-color: #d9166a;
+  color: #fff;
+}
+
+.NavBar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.NavBar li {
+  margin-bottom: 10px; /* space between list items */
+}
