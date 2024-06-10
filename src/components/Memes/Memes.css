@@ -27,21 +27,20 @@
 }
 
 .memeButtons button {
-  background-color: #e376bf; /* Kolor tła przycisku w normalnym stanie */
-  color: #fff; /* Kolor tekstu przycisku w normalnym stanie */
+  background-color: #e376bf;
+  color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   text-decoration: none;
-  margin-right: 5px; /* Dodaje trochę odstępu między przyciskami */
-  cursor: pointer; /* Dodaje kursor wskazujący na przycisk */
+  margin-right: 10px;
+  cursor: pointer;
 }
-
 .memeButtons button:hover {
-  background-color: #d9166a; /* Kolor tła przycisku w stanie hover */
+  background-color: #d9166a;
 }
 
 .memeButtons button.voted {
-  background-color: #d9166a; /* Kolor tła przycisku po kliknięciu */
+  background-color: #d9166a;
   color: #fff;
 }
