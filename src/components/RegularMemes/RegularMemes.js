@@ -1,77 +1,51 @@
-import React, { useState, useEffect } from "react";
-import "../Memes/Memes";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setVotedMemes,
+  voteMeme,
+  updateVotedMemesInLocalStorage,
+} from "../../redux/actions";
+import { getMemes, getVotedMemes } from "../../redux/selectors";
 
 const RegularMemes = () => {
-  const [regularMemes, setRegularMemes] = useState([]);
-  const [votedMemes, setVotedMemes] = useState({}); // Track user votes
+  const dispatch = useDispatch();
+  const memes = useSelector(getMemes);
+  const votedMemes = useSelector(getVotedMemes);
+  const regularMemes = memes.filter(
+    (meme) => meme.upvotes - meme.downvotes <= 5
+  );
 
   useEffect(() => {
-    const storedMemes = localStorage.getItem("memes");
-    if (storedMemes) {
-      const memes = JSON.parse(storedMemes);
-      const filteredMemes = memes.filter(
-        (meme) => meme.upvotes - meme.downvotes <= 5
-      );
-      setRegularMemes(filteredMemes);
-    }
-
     const storedVotes = localStorage.getItem("votedMemes");
     if (storedVotes) {
-      setVotedMemes(JSON.parse(storedVotes));
+      dispatch(setVotedMemes(JSON.parse(storedVotes)));
     }
-  }, []);
+  }, [dispatch]);
 
   const handleVote = (index, voteType) => {
-    const newMemes = [...regularMemes];
-    const newVotedMemes = { ...votedMemes };
-
-    if (newVotedMemes[index] === voteType) {
-      // If user clicks the same vote, undo the vote
-      newVotedMemes[index] = null;
-      if (voteType === "upvote") {
-        newMemes[index].upvotes -= 1;
-      } else {
-        newMemes[index].downvotes -= 1;
-      }
-    } else {
-      // If user clicks a different vote or no vote, apply the vote
-      if (newVotedMemes[index] === "upvote") {
-        newMemes[index].upvotes -= 1;
-      } else if (newVotedMemes[index] === "downvote") {
-        newMemes[index].downvotes -= 1;
-      }
-      newVotedMemes[index] = voteType;
-      if (voteType === "upvote") {
-        newMemes[index].upvotes += 1;
-      } else {
-        newMemes[index].downvotes += 1;
-      }
-    }
-
-    setRegularMemes(newMemes);
-    setVotedMemes(newVotedMemes);
-
-    // Update votedMemes in localStorage
-    localStorage.setItem("votedMemes", JSON.stringify(newVotedMemes));
+    dispatch(voteMeme(index, voteType));
+    dispatch(
+      updateVotedMemesInLocalStorage({ ...votedMemes, [index]: voteType })
+    );
   };
 
   return (
     <div className="memes">
       {regularMemes.map((meme, index) => (
-        <div key={index} className="meme">
+        <div key={meme.id} className="meme">
           <h3>{meme.title}</h3>
           <img src={meme.imagePath} alt={meme.title} className="memeImage" />
           <div className="memeButtons">
             <button
-              onClick={() => handleVote(index, "upvote")}
-              className={votedMemes[index] === "upvote" ? "voted" : ""}
+              onClick={() => handleVote(meme.id, "upvote")}
+              className={votedMemes[meme.id] === "upvote" ? "voted" : ""}
             >
               Lubię to
             </button>
             <span>{meme.upvotes}</span>
             <button
-              onClick={() => handleVote(index, "downvote")}
-              className={votedMemes[index] === "downvote" ? "voted" : ""}
+              onClick={() => handleVote(meme.id, "downvote")}
+              className={votedMemes[meme.id] === "downvote" ? "voted" : ""}
             >
               Nie lubię tego
             </button>
