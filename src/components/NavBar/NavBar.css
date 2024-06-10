@@ -1,20 +1,22 @@
 .NavBar {
   background-color: beige;
-  padding: 20px;
+  padding: 16px;
 }
 
 .nav-button {
   background-color: #eb95ce;
   color: #fff;
-  padding: 10px 20px;
+  padding: 24px 24px;
   border: none;
   border-radius: 5px;
+  font-size: large;
+  font-weight: 600;
   text-decoration: none;
   display: block;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .nav-button:hover {
@@ -33,5 +35,5 @@
 }
 
 .NavBar li {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }

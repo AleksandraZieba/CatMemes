@@ -37,14 +37,14 @@ const RegularMemes = () => {
             >
               Lubię to
             </button>
-            <span>{meme.upvotes}</span>
+            <span className="voteNumber">{meme.upvotes}</span>
             <button
               onClick={() => handleVote(meme.id, "downvote")}
               className={votedMemes[meme.id] === "downvote" ? "voted" : ""}
             >
               Nie lubię tego
             </button>
-            <span>{meme.downvotes}</span>
+            <span className="voteNumber">{meme.downvotes}</span>
           </div>
         </div>
       ))}
