@@ -1,9 +1,9 @@
 import React from "react";
-import "./MemesDisplay.css";
+import { Routes, Route } from "react-router-dom";
 import Memes from "../Memes/Memes";
 import HotMemes from "../HotMemes/HotMemes";
 import RegularMemes from "../RegularMemes/RegularMemes";
-import { Routes, Route } from "react-router-dom";
+import "./MemesDisplay.css";
 
 const MemesDisplay = () => {
   return (

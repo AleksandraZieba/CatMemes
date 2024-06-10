@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setVotedMemes,
-  voteMeme,
-  updateVotedMemesInLocalStorage,
-} from "../../redux/actions";
+import { setVotedMemes, voteMeme } from "../../redux/actions";
 import { getMemes, getVotedMemes } from "../../redux/selectors";
 
 const HotMemes = () => {
@@ -20,16 +16,15 @@ const HotMemes = () => {
     }
   }, [dispatch]);
 
-  const handleVote = (index, voteType) => {
-    dispatch(voteMeme(index, voteType));
-    dispatch(
-      updateVotedMemesInLocalStorage({ ...votedMemes, [index]: voteType })
-    );
+  const handleVote = (id, voteType) => {
+    dispatch(voteMeme(id, voteType));
+    const newVotedMemes = { ...votedMemes, [id]: voteType };
+    localStorage.setItem("votedMemes", JSON.stringify(newVotedMemes));
   };
 
   return (
     <div className="memes">
-      {hotMemes.map((meme, index) => (
+      {hotMemes.map((meme) => (
         <div key={meme.id} className="meme">
           <h3>{meme.title}</h3>
           <img src={meme.imagePath} alt={meme.title} className="memeImage" />

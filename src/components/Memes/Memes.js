@@ -25,44 +25,35 @@ const Memes = () => {
   }, [dispatch]);
 
   const handleVote = (id, voteType) => {
-    // Zmiana argumentu z index na id
-    dispatch(voteMeme(id, voteType)); // Użycie id zamiast indexu
-    const newVotedMemes = { ...votedMemes, [id]: voteType }; // Zaktualizowanie głosu dla mema o podanym id
-
-    // Update localStorage
+    dispatch(voteMeme(id, voteType));
+    const newVotedMemes = { ...votedMemes, [id]: voteType };
     localStorage.setItem("votedMemes", JSON.stringify(newVotedMemes));
   };
 
   return (
     <div className="memes">
-      {memes.map(
-        (
-          meme // Iterowanie przez memy bez używania indexu
-        ) => (
-          <div key={meme.id} className="meme">
-            {" "}
-            {/* Używanie id jako klucza */}
-            <h3>{meme.title}</h3>
-            <img src={meme.imagePath} alt={meme.title} className="memeImage" />
-            <div className="memeButtons">
-              <button
-                onClick={() => handleVote(meme.id, "upvote")}
-                className={votedMemes[meme.id] === "upvote" ? "voted" : ""}
-              >
-                Lubię to
-              </button>
-              <span>{meme.upvotes}</span>
-              <button
-                onClick={() => handleVote(meme.id, "downvote")}
-                className={votedMemes[meme.id] === "downvote" ? "voted" : ""}
-              >
-                Nie lubię tego
-              </button>
-              <span>{meme.downvotes}</span>
-            </div>
+      {memes.map((meme) => (
+        <div key={meme.id} className="meme">
+          <h3>{meme.title}</h3>
+          <img src={meme.imagePath} alt={meme.title} className="memeImage" />
+          <div className="memeButtons">
+            <button
+              onClick={() => handleVote(meme.id, "upvote")}
+              className={votedMemes[meme.id] === "upvote" ? "voted" : ""}
+            >
+              Lubię to
+            </button>
+            <span>{meme.upvotes}</span>
+            <button
+              onClick={() => handleVote(meme.id, "downvote")}
+              className={votedMemes[meme.id] === "downvote" ? "voted" : ""}
+            >
+              Nie lubię tego
+            </button>
+            <span>{meme.downvotes}</span>
           </div>
-        )
-      )}
+        </div>
+      ))}
     </div>
   );
 };

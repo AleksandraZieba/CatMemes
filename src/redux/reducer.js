@@ -1,4 +1,4 @@
-import { setMemes, setVotedMemes, voteMeme } from "./actions";
+import { SET_MEMES, SET_VOTED_MEMES, VOTE_MEME } from "./actions";
 
 const initialState = {
   memes: [],
@@ -7,37 +7,28 @@ const initialState = {
 
 const memeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case setMemes:
+    case SET_MEMES:
       return { ...state, memes: action.payload };
-    case setVotedMemes:
+    case SET_VOTED_MEMES:
       return { ...state, votedMemes: action.payload };
-    case voteMeme:
-      const { index, voteType } = action.payload;
-      const newMemes = [...state.memes];
-      const newVotedMemes = { ...state.votedMemes };
-
-      if (newVotedMemes[index] === voteType) {
-        newVotedMemes[index] = null;
-        if (voteType === "upvote") {
-          newMemes[index].upvotes -= 1;
-        } else {
-          newMemes[index].downvotes -= 1;
+    case VOTE_MEME:
+      const { id, voteType } = action.payload;
+      const newMemes = state.memes.map((meme) => {
+        if (meme.id === id) {
+          return {
+            ...meme,
+            upvotes: voteType === "upvote" ? meme.upvotes + 1 : meme.upvotes,
+            downvotes:
+              voteType === "downvote" ? meme.downvotes + 1 : meme.downvotes,
+          };
         }
-      } else {
-        if (newVotedMemes[index] === "upvote") {
-          newMemes[index].upvotes -= 1;
-        } else if (newVotedMemes[index] === "downvote") {
-          newMemes[index].downvotes -= 1;
-        }
-        newVotedMemes[index] = voteType;
-        if (voteType === "upvote") {
-          newMemes[index].upvotes += 1;
-        } else {
-          newMemes[index].downvotes += 1;
-        }
-      }
-
-      return { ...state, memes: newMemes, votedMemes: newVotedMemes };
+        return meme;
+      });
+      return {
+        ...state,
+        memes: newMemes,
+        votedMemes: { ...state.votedMemes, [id]: voteType },
+      };
     default:
       return state;
   }

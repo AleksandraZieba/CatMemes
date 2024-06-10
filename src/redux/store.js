@@ -1,10 +1,10 @@
-// store/store.js
-import { createStore } from "redux";
-import rootReducer from "../redux/rootReducer";
+import { createStore, combineReducers } from "redux";
+import memeReducer from "./reducer";
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const rootReducer = combineReducers({
+  memes: memeReducer,
+});
+
+const store = createStore(rootReducer);
 
 export default store;
