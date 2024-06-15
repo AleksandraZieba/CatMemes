@@ -1,4 +1,3 @@
-// actions.js
 export const SET_MEMES = "SET_MEMES";
 export const SET_VOTED_MEMES = "SET_VOTED_MEMES";
 export const VOTE_MEME = "VOTE_MEME";

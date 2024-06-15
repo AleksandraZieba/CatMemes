@@ -1,4 +1,3 @@
-// reducers.js
 const initialState = {
   memes: [],
   votedMemes: {},
@@ -33,7 +32,7 @@ const memesReducer = (state = initialState, action) => {
         }
       }
 
-      if (state.votedMemes[id] !== voteType) {
+      if (voteType !== null && state.votedMemes[id] !== voteType) {
         if (voteType === "upvote") {
           updatedMeme.upvotes += 1;
         } else if (voteType === "downvote") {
@@ -44,6 +43,9 @@ const memesReducer = (state = initialState, action) => {
       updatedMemes[memeToUpdateIndex] = updatedMeme;
 
       const newVotedMemes = { ...state.votedMemes, [id]: voteType };
+      if (voteType === null) {
+        delete newVotedMemes[id];
+      }
       localStorage.setItem("votedMemes", JSON.stringify(newVotedMemes));
       localStorage.setItem("memes", JSON.stringify(updatedMemes));
 

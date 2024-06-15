@@ -17,9 +17,12 @@ const HotMemes = () => {
   }, [dispatch]);
 
   const handleVote = (id, voteType) => {
-    dispatch(voteMeme(id, voteType));
-    const newVotedMemes = { ...votedMemes, [id]: voteType };
-    localStorage.setItem("votedMemes", JSON.stringify(newVotedMemes));
+    const currentVote = votedMemes[id];
+    if (currentVote === voteType) {
+      dispatch(voteMeme(id, null));
+    } else {
+      dispatch(voteMeme(id, voteType));
+    }
   };
 
   return (
